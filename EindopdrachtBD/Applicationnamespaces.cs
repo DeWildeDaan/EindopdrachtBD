@@ -7,6 +7,7 @@ global using Project.Configuration;
 global using Project.Context;
 global using Project.Repositories;
 global using Project.Model;
+global using Project.Service;
 
 //NuGet
 global using MongoDB.Bson;

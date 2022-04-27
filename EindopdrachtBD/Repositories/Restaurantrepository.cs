@@ -35,21 +35,12 @@ public class RestaurantRepository : IRestaurantRepository
         }
     }
 
-    public async Task<List<Restaurant>> AddRestaurants(List<Restaurant> newRestaurants)
-    {
-        foreach(Restaurant b in newRestaurants){
-            await _context.RestaurantsCollection.InsertOneAsync(b);
-        };
-        return newRestaurants;
-        
-    }
-
     public async Task<Restaurant> UpdateRestaurant(Restaurant newRestaurant)
     {
         try
         {
             var filter = Builders<Restaurant>.Filter.Eq("RestaurantId", newRestaurant.RestaurantId);
-            var update = Builders<Restaurant>.Update.Set("Name", newRestaurant.Name).Set("Country", newRestaurant.Country).Set("Region", newRestaurant.Region).Set("Province", newRestaurant.Province).Set("City", newRestaurant.City);
+            var update = Builders<Restaurant>.Update.Set("Name", newRestaurant.Name).Set("Email", newRestaurant.Email).Set("Country", newRestaurant.Country).Set("Province", newRestaurant.Province).Set("City", newRestaurant.City).Set("StreetAndNumber", newRestaurant.StreetAndNumber);
             var result = await _context.RestaurantsCollection.UpdateOneAsync(filter, update);
             return await GetRestaurant(newRestaurant.RestaurantId);
         }
@@ -66,7 +57,7 @@ public class RestaurantRepository : IRestaurantRepository
         {
             var filter = Builders<Restaurant>.Filter.Eq("RestaurantId", id);
             var result = await _context.RestaurantsCollection.DeleteOneAsync(filter);
-            return "Deleted";
+            return $"Deleted {id}";
         }
         catch (Exception ex)
         {

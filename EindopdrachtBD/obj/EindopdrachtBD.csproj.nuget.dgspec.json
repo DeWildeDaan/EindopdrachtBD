@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\School\\BackendDev\\EindopdrachtBD\\EindopdrachtBD\\EindopdrachtBD.csproj": {}
+    "C:\\School\\BackendDev\\EindopdrachtBD\\EindopdrachtBD\\EindopdrachtBD.csproj": {}
   },
   "projects": {
-    "c:\\School\\BackendDev\\EindopdrachtBD\\EindopdrachtBD\\EindopdrachtBD.csproj": {
+    "C:\\School\\BackendDev\\EindopdrachtBD\\EindopdrachtBD\\EindopdrachtBD.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\School\\BackendDev\\EindopdrachtBD\\EindopdrachtBD\\EindopdrachtBD.csproj",
+        "projectUniqueName": "C:\\School\\BackendDev\\EindopdrachtBD\\EindopdrachtBD\\EindopdrachtBD.csproj",
         "projectName": "EindopdrachtBD",
-        "projectPath": "c:\\School\\BackendDev\\EindopdrachtBD\\EindopdrachtBD\\EindopdrachtBD.csproj",
+        "projectPath": "C:\\School\\BackendDev\\EindopdrachtBD\\EindopdrachtBD\\EindopdrachtBD.csproj",
         "packagesPath": "C:\\Users\\daand\\.nuget\\packages\\",
-        "outputPath": "c:\\School\\BackendDev\\EindopdrachtBD\\EindopdrachtBD\\obj\\",
+        "outputPath": "C:\\School\\BackendDev\\EindopdrachtBD\\EindopdrachtBD\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -49,6 +49,10 @@
             "MongoDB.Driver": {
               "target": "Package",
               "version": "[2.14.1, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.3.0, )"
             }
           },
           "imports": [

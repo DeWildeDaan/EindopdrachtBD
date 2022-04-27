@@ -3,7 +3,7 @@ namespace Project.Repositories;
 public interface IReviewRepository
 {
     Task<Review> AddReview(Review newReview);
-    Task<string> DeleteReview(string id);
+    Task<String> DeleteReview(string id);
     Task<Review> GetReview(string id);
     Task<List<Review>> GetReviews();
     Task<Review> UpdateReview(Review newReview);
@@ -40,7 +40,7 @@ public class ReviewRepository : IReviewRepository
         try
         {
             var filter = Builders<Review>.Filter.Eq("ReviewId", newReview.ReviewId);
-            var update = Builders<Review>.Update.Set("Text", newReview.Text);
+            var update = Builders<Review>.Update.Set("Text", newReview.Text).Set("Score", newReview.Score);
             var result = await _context.ReviewsCollection.UpdateOneAsync(filter, update);
             return await GetReview(newReview.ReviewId);
         }

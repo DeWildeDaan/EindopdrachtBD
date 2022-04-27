@@ -12,5 +12,5 @@ public class Restaurant
     public string? City { get; set; }
     public string? StreetAndNumber { get; set; }
     public int TotalReviews { get; set; }
-    public int AverageScore { get; set; }
+    public double AverageScore { get; set; }
 }

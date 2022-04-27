@@ -6,6 +6,7 @@ public interface IReviewRepository
     Task<String> DeleteReview(string id);
     Task<Review> GetReview(string id);
     Task<List<Review>> GetReviews();
+    Task<List<Review>> GetReviewsRestaurant(string id);
     Task<Review> UpdateReview(Review newReview);
 }
 
@@ -18,6 +19,8 @@ public class ReviewRepository : IReviewRepository
     }
 
     public async Task<List<Review>> GetReviews() => await _context.ReviewsCollection.Find<Review>(_ => true).ToListAsync();
+
+    public async Task<List<Review>> GetReviewsRestaurant(string id) => await _context.ReviewsCollection.Find<Review>(x => x.RestaurantId == id).ToListAsync();
 
     public async Task<Review> GetReview(string id) => await _context.ReviewsCollection.Find<Review>(x => x.ReviewId == id).FirstOrDefaultAsync();
 

@@ -60,7 +60,7 @@ public class ReviewRepository : IReviewRepository
         {
             var filter = Builders<Review>.Filter.Eq("ReviewId", id);
             var result = await _context.ReviewsCollection.DeleteOneAsync(filter);
-            return "Deleted";
+            return $"Deleted {id}";
         }
         catch (Exception ex)
         {

@@ -1,0 +1,90 @@
+GET http://localhost:3000/setup HTTP/1.1
+Content-Type: application/json
+###
+
+POST http://localhost:3000/authenticate HTTP/1.1
+Content-Type: application/json
+
+{
+    "UserName": "Daan De Wilde",
+    "Password": "daandewilde"
+}
+###
+
+GET http://localhost:3000/restaurants HTTP/1.1
+Content-Type: application/json
+###
+
+GET http://localhost:3000/restaurant/626988dbb601fb6abf8dfc69 HTTP/1.1
+Content-Type: application/json
+###
+
+DELETE http://localhost:3000/restaurant/626a7e894778c12566641c92 HTTP/1.1
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZ2l2ZW5fbmFtZSI6IkRlIFdpbGRlIERhYW4iLCJjaXR5IjoiWmVsZSIsIm5iZiI6MTY1MTE0NjQwMSwiZXhwIjoxNjUxMTUwMDAxLCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDozMDAwIiwiYXVkIjoicmVzdGF1cmFudF9hcGlfdXNlcnMifQ.bOHWY2FuNeyWctnhCrrCMTQxG6_AtSC6YRikey3fMyY
+###
+
+POST http://localhost:3000/restaurant HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Testje",
+  "email": "test@test.be",
+  "country": "Belgium",
+  "province": "West-Flanders",
+  "city": "Kortrijk",
+  "streetAndNumber": "Karel-Graaf-Goedelaan 1"
+}
+###
+
+PUT  http://localhost:3000/restaurant HTTP/1.1
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZ2l2ZW5fbmFtZSI6IkRlIFdpbGRlIERhYW4iLCJjaXR5IjoiWmVsZSIsIm5iZiI6MTY1MTE0NjQwMSwiZXhwIjoxNjUxMTUwMDAxLCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDozMDAwIiwiYXVkIjoicmVzdGF1cmFudF9hcGlfdXNlcnMifQ.bOHWY2FuNeyWctnhCrrCMTQxG6_AtSC6YRikey3fMyY
+
+{
+  "restaurantId": "626a7fb14778c12566641c93",
+  "name": "Testje",
+  "email": "test@test.be",
+  "country": "Belgium",
+  "province": "West-Flanders",
+  "city": "Kortrijk",
+  "streetAndNumber": "Karel-Graaf-Goedelaan 2"
+}
+###
+
+GET http://localhost:3000/reviews HTTP/1.1
+Content-Type: application/json
+###
+
+GET http://localhost:3000/review/626992c08f5dcf7229739e2f HTTP/1.1
+Content-Type: application/json
+###
+
+DELETE http://localhost:3000/review/626992c08f5dcf7229739e2f HTTP/1.1
+Content-Type: application/json
+###
+
+GET http://localhost:3000/restaurantreview/626988dbb601fb6abf8dfc69 HTTP/1.1
+Content-Type: application/json
+###
+
+POST http://localhost:3000/review HTTP/1.1
+Content-Type: application/json
+
+{
+  "restaurantId": "626988dbb601fb6abf8dfc69",
+  "text": "Dit is een review.",
+  "score": 5.0
+}
+###
+
+PUT http://localhost:3000/review HTTP/1.1
+Content-Type: application/json
+
+{
+  "reviewId": "626a81a84778c12566641c95",
+  "restaurantId": "626988dbb601fb6abf8dfc69",
+  "text": "Dit is een verbeterde review.",
+  "score": 5.0
+}
+###

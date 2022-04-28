@@ -40,7 +40,7 @@ public class RestaurantRepository : IRestaurantRepository
         try
         {
             var filter = Builders<Restaurant>.Filter.Eq("RestaurantId", newRestaurant.RestaurantId);
-            var update = Builders<Restaurant>.Update.Set("Name", newRestaurant.Name).Set("Email", newRestaurant.Email).Set("Country", newRestaurant.Country).Set("Province", newRestaurant.Province).Set("City", newRestaurant.City).Set("StreetAndNumber", newRestaurant.StreetAndNumber);
+            var update = Builders<Restaurant>.Update.Set("Name", newRestaurant.Name).Set("Email", newRestaurant.Email).Set("Country", newRestaurant.Country).Set("Province", newRestaurant.Province).Set("City", newRestaurant.City).Set("StreetAndNumber", newRestaurant.StreetAndNumber).Set("TotalReviews", newRestaurant.TotalReviews).Set("AverageScore", newRestaurant.AverageScore);
             var result = await _context.RestaurantsCollection.UpdateOneAsync(filter, update);
             return await GetRestaurant(newRestaurant.RestaurantId);
         }

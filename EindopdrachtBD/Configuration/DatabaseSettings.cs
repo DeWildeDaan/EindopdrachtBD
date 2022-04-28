@@ -6,5 +6,6 @@ public class DatabaseSettings
     public string? DatabaseName { get; set; }
     public string? RestaurantsCollection { get; set; }
     public string? ReviewsCollection { get; set; }
+    public string? UsersCollection { get; set; }
     
 }

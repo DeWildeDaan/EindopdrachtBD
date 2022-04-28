@@ -7,7 +7,8 @@ public interface IReviewService
     Task<Review> GetReview(string id);
     Task<List<Review>> GetReviews();
     Task<Review> UpdateReview(Review review);
-    Task GetRestaurantData(Review review);
+    Task<List<Review>> GetReviewsRestaurant(string id);
+    Task UpdateRestaurantData(Review review);
 }
 
 public class ReviewService : IReviewService
@@ -37,14 +38,14 @@ public class ReviewService : IReviewService
         //review.ReviewId = Guid.NewGuid().ToString();
         review.DateAndTime = DateTime.Now;
         var results = await _reviewRepository.AddReview(review);
-        await GetRestaurantData(review);
+        await UpdateRestaurantData(review);
         return results;
     }
 
     public async Task<Review> UpdateReview(Review review)
     {
         var results = await _reviewRepository.UpdateReview(review);
-        await GetRestaurantData(review);
+        await UpdateRestaurantData(review);
         return results;
     }
 
@@ -52,13 +53,18 @@ public class ReviewService : IReviewService
     {
         Review review = await GetReview(id);
         var results = await _reviewRepository.DeleteReview(id);
-        await GetRestaurantData(review);
+        await UpdateRestaurantData(review);
         return results;
     }
 
-    public async Task GetRestaurantData(Review review){
+    public async Task<List<Review>> GetReviewsRestaurant(string id)
+    {
+        return await _reviewRepository.GetReviewsRestaurant(id);
+    }
+
+    public async Task UpdateRestaurantData(Review review){
         List<Review> reviews = await _reviewRepository.GetReviewsRestaurant(review.RestaurantId);
-        int score = 0;
+        double score = 0;
         int count = 0;
         foreach(Review r in reviews){
             score = score + r.Score;

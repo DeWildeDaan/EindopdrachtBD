@@ -6,6 +6,7 @@ public interface IMongoContext
     IMongoDatabase Database { get; }
     IMongoCollection<Restaurant> RestaurantsCollection { get; }
     IMongoCollection<Review> ReviewsCollection { get; }
+    IMongoCollection<User> UsersCollection { get; }
 }
 
 public class MongoContext : IMongoContext
@@ -43,6 +44,14 @@ public class MongoContext : IMongoContext
         get
         {
             return _database.GetCollection<Review>(_settings.ReviewsCollection);
+        }
+    }
+
+    public IMongoCollection<User> UsersCollection
+    {
+        get
+        {
+            return _database.GetCollection<User>(_settings.UsersCollection);
         }
     }
 }

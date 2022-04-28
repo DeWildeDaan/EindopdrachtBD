@@ -7,6 +7,6 @@ public class Review
     public string? ReviewId { get; set; }
     public string? RestaurantId { get; set; }
     public string? Text { get; set; }
-    public int Score { get; set; }
+    public double Score { get; set; }
     public DateTime DateAndTime { get; set; }
 }

@@ -8,7 +8,7 @@ public interface IRestaurantService
     Task<Restaurant> GetRestaurant(string id);
     Task<List<Restaurant>> GetRestaurants();
     Task<Restaurant> UpdateRestaurant(Restaurant restaurant);
-    Task UpdateRestaurantData(Review review, double score, int count);
+    Task UpdateRestaurantData(Review review, double avg, int count);
 }
 
 public class RestaurantService : IRestaurantService
@@ -58,9 +58,9 @@ public class RestaurantService : IRestaurantService
         return await _restaurantRepository.DeleteRestaurant(id);
     }
 
-    public async Task UpdateRestaurantData(Review review, double score, int count){
+    public async Task UpdateRestaurantData(Review review, double avg, int count){
         Restaurant restaurant = await _restaurantRepository.GetRestaurant(review.RestaurantId);
-        restaurant.AverageScore = score;
+        restaurant.AverageScore = avg;
         restaurant.TotalReviews = count;
         await _restaurantRepository.UpdateRestaurant(restaurant);
     }

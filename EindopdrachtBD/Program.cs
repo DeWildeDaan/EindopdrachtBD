@@ -114,10 +114,10 @@ app.UseExceptionHandler(c => c.Run(async context =>
     }
 }));
 
-//app.Run("http://localhost:3000");
+app.Run("http://localhost:3000");
 
 //app.Run();
 // public partial class Program { }
 
 
-app.Run("http://0.0.0.0:3000");
+//app.Run("http://0.0.0.0:3000");

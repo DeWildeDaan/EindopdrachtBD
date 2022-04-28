@@ -3,15 +3,15 @@
 version: '3.4'
 
 services:
-  eindopdrachtbd:
-    image: eindopdrachtbd
-    build:
-      context: .
-      dockerfile: EindopdrachtBD/Dockerfile
-    ports:
-      - 3000:3000
-    volumes:
-      - ./EindopdrachtBD/appsettings.docker.json:/app/appsettings.json
+  # eindopdrachtbd:
+  #   image: eindopdrachtbd
+  #   build:
+  #     context: .
+  #     dockerfile: EindopdrachtBD/Dockerfile
+  #   ports:
+  #     - 3000:3000
+  #   volumes:
+  #     - ./EindopdrachtBD/appsettings.docker.json:/app/appsettings.json
       
   mongo:
     hostname: mongo

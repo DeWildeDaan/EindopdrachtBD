@@ -100,12 +100,24 @@ app.MapPut("/review", async (IReviewService reviewService, Review review) => Res
 
 app.MapDelete("/review/{id}", async (IReviewService reviewService, string id) => Results.Ok(await reviewService.DeleteReview(id)));
 
-//Local/development
+app.UseExceptionHandler(c => c.Run(async context =>
+{
+    var exception = context.Features
+        .Get<IExceptionHandlerFeature>()
+        ?.Error;
+    if (exception is not null)
+    {
+        var response = new { error = exception.Message };
+        context.Response.StatusCode = 400;
+
+        await context.Response.WriteAsJsonAsync(response);
+    }
+}));
+
 //app.Run("http://localhost:3000");
 
-//Docker
-app.Run();
-public partial class Program { }
+//app.Run();
+// public partial class Program { }
 
 
-//app.Run("http://0.0.0:3000");
+app.Run("http://0.0.0.0:3000");

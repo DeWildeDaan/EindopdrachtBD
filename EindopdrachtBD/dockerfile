@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:6.0-focal AS base
 WORKDIR /app
 EXPOSE 3000
 
-#ENV ASPNETCORE_URLS=http://+:5212
+ENV ASPNETCORE_URLS=http://+:3000
 
 # Creates a non-root user with an explicit UID and adds permission to access the /app folder
 # For more info, please refer to https://aka.ms/vscode-docker-dotnet-configure-containers
@@ -11,10 +11,10 @@ USER appuser
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0-focal AS build
 WORKDIR /src
-COPY ["EindopdrachtBD.csproj", "./"]
-RUN dotnet restore "EindopdrachtBD.csproj"
+COPY ["EindopdrachtBD/EindopdrachtBD.csproj", "EindopdrachtBD/"]
+RUN dotnet restore "EindopdrachtBD/EindopdrachtBD.csproj"
 COPY . .
-WORKDIR "/src/."
+WORKDIR "/src/EindopdrachtBD"
 RUN dotnet build "EindopdrachtBD.csproj" -c Release -o /app/build
 
 FROM build AS publish

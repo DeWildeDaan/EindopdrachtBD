@@ -1,6 +1,7 @@
 //.NET
 global using System;
 global using Microsoft.Extensions.Options;
+global using Microsoft.AspNetCore.Diagnostics;
 global using System.Diagnostics;
 
 //Custom

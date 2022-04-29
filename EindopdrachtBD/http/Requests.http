@@ -19,9 +19,9 @@ GET http://localhost:3000/restaurant/626988dbb601fb6abf8dfc69 HTTP/1.1
 Content-Type: application/json
 ###
 
-DELETE http://localhost:3000/restaurant/626a7e894778c12566641c92 HTTP/1.1
+DELETE http://localhost:3000/restaurant/626bda65620420d4903e31e2 HTTP/1.1
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZ2l2ZW5fbmFtZSI6IkRlIFdpbGRlIERhYW4iLCJjaXR5IjoiWmVsZSIsIm5iZiI6MTY1MTE0NjQwMSwiZXhwIjoxNjUxMTUwMDAxLCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDozMDAwIiwiYXVkIjoicmVzdGF1cmFudF9hcGlfdXNlcnMifQ.bOHWY2FuNeyWctnhCrrCMTQxG6_AtSC6YRikey3fMyY
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZ2l2ZW5fbmFtZSI6IkRhYW4gRGUgV2lsZGUiLCJjaXR5IjoiWmVsZSIsIm5iZiI6MTY1MTI0Nzc1NSwiZXhwIjoxNjUxMjUxMzU1LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDozMDAwIiwiYXVkIjoicmVzdGF1cmFudF9hcGlfdXNlcnMifQ.iDNbAv8BiGYAKkbyJbTVMmDMq8obtmC8L17-EwF0ruo
 ###
 
 POST http://localhost:3000/restaurant HTTP/1.1

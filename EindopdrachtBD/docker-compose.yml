@@ -26,11 +26,8 @@ services:
       ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
 
   eindopdrachtbd:
-    image: eindopdrachtbd
+    image: ghcr.io/dewildedaan/eindopdrachtbd:latest
     restart: always
-    build:
-      context: .
-      dockerfile: ./Dockerfile
     ports:
       - 3000:3000
     environment:

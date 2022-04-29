@@ -13,7 +13,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
     volumes:
-      - database_files:/data/db
+      - ./Data:/data/db
  
   mongo-express:
     image: mongo-express
@@ -37,6 +37,3 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
     volumes:
       - ./appsettings.docker.json:/app/appsettings.json
-
-volumes:
-  database_files:

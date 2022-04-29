@@ -1,10 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "RXZQHGVRH3wICEXfpcmBwvMa1ccqkv4oetBpkabp/zuXro3k1wRK1zlRCQrjvNIZEi3oeN907gQSQ6Kss1m2FA==",
+  "dgSpecHash": "008J7XGx9NNe70XR7ldqaqhhNVUylCf1wCiHavQdaRkmeQi27mLr77OIHX8zsDrwlzXKBiSfG4RJ6prVA3tVYA==",
   "success": true,
   "projectFilePath": "C:\\School\\BackendDev\\EindopdrachtBD\\EindopdrachtBD\\EindopdrachtBD.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\daand\\.nuget\\packages\\dnsclient\\1.4.0\\dnsclient.1.4.0.nupkg.sha512",
+    "C:\\Users\\daand\\.nuget\\packages\\fluentvalidation\\10.3.6\\fluentvalidation.10.3.6.nupkg.sha512",
+    "C:\\Users\\daand\\.nuget\\packages\\fluentvalidation.aspnetcore\\10.3.6\\fluentvalidation.aspnetcore.10.3.6.nupkg.sha512",
+    "C:\\Users\\daand\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\10.3.6\\fluentvalidation.dependencyinjectionextensions.10.3.6.nupkg.sha512",
     "C:\\Users\\daand\\.nuget\\packages\\greendonut\\12.6.0\\greendonut.12.6.0.nupkg.sha512",
     "C:\\Users\\daand\\.nuget\\packages\\hotchocolate\\12.6.0\\hotchocolate.12.6.0.nupkg.sha512",
     "C:\\Users\\daand\\.nuget\\packages\\hotchocolate.abstractions\\12.6.0\\hotchocolate.abstractions.12.6.0.nupkg.sha512",

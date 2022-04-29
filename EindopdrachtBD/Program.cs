@@ -11,6 +11,9 @@ builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IRestaurantService, RestaurantService>();
 builder.Services.AddTransient<IReviewService, ReviewService>();
 builder.Services.AddTransient<IAuthenticationService, AuthenticationService>();
+//Validation
+builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<RestaurantValidator>());
+builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<ReviewValidator>());
 //Swagger
 builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();
@@ -74,12 +77,27 @@ app.MapGet("/restaurants", async (IRestaurantService restaurantService) => Resul
 
 app.MapGet("/restaurant/{id}", async (IRestaurantService restaurantService, string id) => Results.Ok(await restaurantService.GetRestaurant(id)));
 
-app.MapPost("/restaurant", async (IRestaurantService restaurantService, Restaurant restaurant) => {
-    var results = await restaurantService.AddRestaurant(restaurant);
-    return Results.Created($"/restaurant/{restaurant.RestaurantId}", results);
+app.MapPost("/restaurant", async (IValidator<Restaurant> validator, IRestaurantService restaurantService, Restaurant restaurant) => {
+    var validatorResult = validator.Validate(restaurant);
+    if(validatorResult.IsValid){
+        var results = await restaurantService.AddRestaurant(restaurant);
+        return Results.Created($"/restaurant/{restaurant.RestaurantId}", results);
+    }else {
+        var errors = validatorResult.Errors.Select(x => new { errors = x.ErrorMessage});
+        return Results.BadRequest(errors);
+    }
 });
 
-app.MapPut("/restaurant", [Authorize] async (IRestaurantService restaurantService, Restaurant restaurant) => Results.Ok(await restaurantService.UpdateRestaurant(restaurant)));
+app.MapPut("/restaurant", [Authorize] async (IValidator<Restaurant> validator,IRestaurantService restaurantService, Restaurant restaurant) => {
+    var validatorResult = validator.Validate(restaurant);
+    if(validatorResult.IsValid){
+        var results = await restaurantService.UpdateRestaurant(restaurant);
+        return Results.Created($"/restaurant/{restaurant.RestaurantId}", results);
+    }else {
+        var errors = validatorResult.Errors.Select(x => new { errors = x.ErrorMessage});
+        return Results.BadRequest(errors);
+    }
+});
 
 app.MapDelete("/restaurant/{id}", [Authorize] async (IRestaurantService restaurantService, string id) => Results.Ok(await restaurantService.DeleteRestaurant(id)));
 
@@ -91,12 +109,27 @@ app.MapGet("/review/{id}", async (IReviewService reviewService, string id) => Re
 
 app.MapGet("/restaurantreview/{id}", async (IReviewService reviewService, string id) => Results.Ok(await reviewService.GetReviewsRestaurant(id)));
 
-app.MapPost("/review", async (IReviewService reviewService, Review review) => {
-    var results = await reviewService.AddReview(review);
-    return Results.Created($"/review/{review.ReviewId}", results);
+app.MapPost("/review", async (IValidator<Review> validator, IReviewService reviewService, Review review) => {
+    var validatorResult = validator.Validate(review);
+    if(validatorResult.IsValid){
+        var results = await reviewService.AddReview(review);
+        return Results.Created($"/review/{review.ReviewId}", results);
+    }else {
+        var errors = validatorResult.Errors.Select(x => new { errors = x.ErrorMessage});
+        return Results.BadRequest(errors);
+    }
 });
 
-app.MapPut("/review", async (IReviewService reviewService, Review review) => Results.Ok(await reviewService.UpdateReview(review)));
+app.MapPut("/review", async (IValidator<Review> validator, IReviewService reviewService, Review review) => {
+    var validatorResult = validator.Validate(review);
+    if(validatorResult.IsValid){
+        var results = await reviewService.UpdateReview(review);
+        return Results.Created($"/review/{review.ReviewId}", results);
+    }else {
+        var errors = validatorResult.Errors.Select(x => new { errors = x.ErrorMessage});
+        return Results.BadRequest(errors);
+    }
+});
 
 app.MapDelete("/review/{id}", async (IReviewService reviewService, string id) => Results.Ok(await reviewService.DeleteReview(id)));
 
@@ -114,10 +147,10 @@ app.UseExceptionHandler(c => c.Run(async context =>
     }
 }));
 
-//app.Run("http://localhost:3000");
+app.Run("http://localhost:3000");
 
 //app.Run();
 // public partial class Program { }
 
 
-app.Run("http://0.0.0.0:3000");
+//app.Run("http://0.0.0.0:3000");

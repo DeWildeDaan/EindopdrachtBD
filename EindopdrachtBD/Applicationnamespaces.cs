@@ -11,6 +11,7 @@ global using Project.Repositories;
 global using Project.Model;
 global using Project.Service;
 global using Project.GraphQL;
+global using Project.Validator;
 
 //NuGet
 global using MongoDB.Bson;
@@ -20,3 +21,5 @@ global using Microsoft.IdentityModel.Tokens;
 global using System.IdentityModel.Tokens.Jwt;
 global using System.Security.Claims;
 global using Microsoft.AspNetCore.Authorization;
+global using FluentValidation;
+global using FluentValidation.AspNetCore;

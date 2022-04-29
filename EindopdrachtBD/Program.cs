@@ -147,10 +147,8 @@ app.UseExceptionHandler(c => c.Run(async context =>
     }
 }));
 
-app.Run("http://localhost:3000");
 
-//app.Run();
-// public partial class Program { }
-
-
-//app.Run("http://0.0.0.0:3000");
+//Local development
+//app.Run("http://localhost:3000");
+//Docker
+app.Run("http://0.0.0.0:3000");

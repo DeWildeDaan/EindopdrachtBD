@@ -3,6 +3,8 @@ global using System;
 global using Microsoft.Extensions.Options;
 global using Microsoft.AspNetCore.Diagnostics;
 global using System.Diagnostics;
+global using System.Collections.Generic;
+global using System.Linq;
 
 //Custom
 global using Project.Configuration;

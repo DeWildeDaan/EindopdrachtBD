@@ -25,15 +25,15 @@ services:
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
       ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
 
-  eindopdrachtbd:
-    image: eindopdrachtbd
-    restart: always
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-    ports:
-      - 3000:3000
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-    volumes:
-      - ./appsettings.docker.json:/app/appsettings.json
+  # eindopdrachtbd:
+  #   image: eindopdrachtbd
+  #   restart: always
+  #   build:
+  #     context: .
+  #     dockerfile: ./Dockerfile
+  #   ports:
+  #     - 3000:3000
+  #   environment:
+  #     - ASPNETCORE_ENVIRONMENT=Development
+  #   volumes:
+  #     - ./appsettings.docker.json:/app/appsettings.json

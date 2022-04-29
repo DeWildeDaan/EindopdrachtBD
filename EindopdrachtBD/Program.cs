@@ -75,7 +75,14 @@ app.MapGraphQL();
 //Restaurants
 app.MapGet("/restaurants", async (IRestaurantService restaurantService) => Results.Ok(await restaurantService.GetRestaurants()));
 
-app.MapGet("/restaurant/{id}", async (IRestaurantService restaurantService, string id) => Results.Ok(await restaurantService.GetRestaurant(id)));
+app.MapGet("/restaurant/{id}", async (IRestaurantService restaurantService, string id) => {
+    var results = await restaurantService.GetRestaurant(id);
+    if(results is null){
+        return Results.NoContent();
+    } else {
+        return Results.Ok(results);
+    }
+});
 
 app.MapPost("/restaurant", async (IValidator<Restaurant> validator, IRestaurantService restaurantService, Restaurant restaurant) => {
     var validatorResult = validator.Validate(restaurant);
@@ -105,9 +112,23 @@ app.MapDelete("/restaurant/{id}", [Authorize] async (IRestaurantService restaura
 //Reviews
 app.MapGet("/reviews", async (IReviewService reviewService) => Results.Ok(await reviewService.GetReviews()));
 
-app.MapGet("/review/{id}", async (IReviewService reviewService, string id) => Results.Ok(await reviewService.GetReview(id)));
+app.MapGet("/review/{id}", async (IReviewService reviewService, string id) => {
+    var results = await reviewService.GetReview(id);
+    if(results is null){
+        return Results.NoContent();
+    } else {
+        return Results.Ok(results);
+    }
+});
 
-app.MapGet("/restaurantreview/{id}", async (IReviewService reviewService, string id) => Results.Ok(await reviewService.GetReviewsRestaurant(id)));
+app.MapGet("/restaurantreview/{id}", async (IReviewService reviewService, string id) => {
+    var results = await reviewService.GetReviewsRestaurant(id);
+    if(results.Count() == 0){
+        return Results.NoContent();
+    } else {
+        return Results.Ok(results);
+    }
+});
 
 app.MapPost("/review", async (IValidator<Review> validator, IReviewService reviewService, Review review) => {
     var validatorResult = validator.Validate(review);
@@ -151,4 +172,7 @@ app.UseExceptionHandler(c => c.Run(async context =>
 //Local development
 //app.Run("http://localhost:3000");
 //Docker
-app.Run("http://0.0.0.0:3000");
+//app.Run("http://0.0.0.0:3000");
+//Tests
+app.Run(); 
+public partial class Program { }

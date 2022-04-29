@@ -1,6 +1,9 @@
 namespace Project_Tests;
 public class Helper
 {
+    public static IReviewService CreateReviewService(){
+        return CreateApi().Services.GetService<IReviewService>();
+    }
 
     public static WebApplicationFactory<Program> CreateApi(){
     var application = new WebApplicationFactory<Program>()

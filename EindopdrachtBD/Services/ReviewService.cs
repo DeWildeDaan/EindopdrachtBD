@@ -63,14 +63,22 @@ public class ReviewService : IReviewService
     }
 
     public async Task UpdateRestaurantData(Review review){
-        List<Review> reviews = await _reviewRepository.GetReviewsRestaurant(review.RestaurantId);
-        double score = 0;
-        int count = 0;
-        foreach(Review r in reviews){
-            score = score + r.Score;
-            count++;
+        if(review is null){
+            throw new ArgumentException();
+        } else {
+            List<Review> reviews = await _reviewRepository.GetReviewsRestaurant(review.RestaurantId);
+            if(reviews.Count() == 0){
+                throw new ArgumentException();
+            } else {
+                double score = 0;
+                int count = 0;
+                foreach(Review r in reviews){
+                    score = score + r.Score;
+                    count++;
+                }
+                double avg = score / count;
+                await _restaurantService.UpdateRestaurantData(review, Math.Round(avg, 2), count);
+            }
         }
-        double avg = score / count;
-        await _restaurantService.UpdateRestaurantData(review, Math.Round(avg, 2), count);
     }
 }

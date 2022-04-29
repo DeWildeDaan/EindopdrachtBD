@@ -3,16 +3,6 @@
 version: '3.4'
 
 services:
-  # eindopdrachtbd:
-  #   image: eindopdrachtbd
-  #   build:
-  #     context: .
-  #     dockerfile: EindopdrachtBD/Dockerfile
-  #   ports:
-  #     - 3000:3000
-  #   volumes:
-  #     - ./EindopdrachtBD/appsettings.docker.json:/app/appsettings.json
-      
   mongo:
     hostname: mongo
     image: mongo
@@ -23,7 +13,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
     volumes:
-      - ./EindopdrachtBD/Data:/data/db
+      - ./Data:/data/db
  
   mongo-express:
     image: mongo-express
@@ -34,3 +24,17 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
       ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+
+  eindopdrachtbd:
+    image: eindopdrachtbd
+    restart: always
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 3000:3000
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    volumes:
+      - ./appsettings.docker.json:/app/appsettings.json
+      - ~/.vsdbg:/remote_debugger:rw

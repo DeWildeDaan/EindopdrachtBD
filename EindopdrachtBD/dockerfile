@@ -11,10 +11,10 @@ USER appuser
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0-focal AS build
 WORKDIR /src
-COPY ["EindopdrachtBD/EindopdrachtBD.csproj", "EindopdrachtBD/"]
-RUN dotnet restore "EindopdrachtBD/EindopdrachtBD.csproj"
+COPY ["EindopdrachtBD.csproj", "./"]
+RUN dotnet restore "EindopdrachtBD.csproj"
 COPY . .
-WORKDIR "/src/EindopdrachtBD"
+WORKDIR "/src/."
 RUN dotnet build "EindopdrachtBD.csproj" -c Release -o /app/build
 
 FROM build AS publish

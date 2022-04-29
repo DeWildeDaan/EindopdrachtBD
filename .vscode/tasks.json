@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/EindopdrachtBD.csproj",
+                "${workspaceFolder}/EindopdrachtBD/EindopdrachtBD.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/EindopdrachtBD.csproj",
+                "${workspaceFolder}/EindopdrachtBD/EindopdrachtBD.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -33,7 +33,7 @@
                 "watch",
                 "run",
                 "--project",
-                "${workspaceFolder}/EindopdrachtBD.csproj"
+                "${workspaceFolder}/EindopdrachtBD/EindopdrachtBD.csproj"
             ],
             "problemMatcher": "$msCompile"
         },
@@ -46,12 +46,12 @@
             "dockerBuild": {
                 "tag": "eindopdrachtbd:dev",
                 "target": "base",
-                "dockerfile": "${workspaceFolder}/Dockerfile",
+                "dockerfile": "${workspaceFolder}/EindopdrachtBD/Dockerfile",
                 "context": "${workspaceFolder}",
                 "pull": true
             },
             "netCore": {
-                "appProject": "${workspaceFolder}/EindopdrachtBD.csproj"
+                "appProject": "${workspaceFolder}/EindopdrachtBD/EindopdrachtBD.csproj"
             }
         },
         {
@@ -62,12 +62,12 @@
             ],
             "dockerBuild": {
                 "tag": "eindopdrachtbd:latest",
-                "dockerfile": "${workspaceFolder}/Dockerfile",
+                "dockerfile": "${workspaceFolder}/EindopdrachtBD/Dockerfile",
                 "context": "${workspaceFolder}",
                 "pull": true
             },
             "netCore": {
-                "appProject": "${workspaceFolder}/EindopdrachtBD.csproj"
+                "appProject": "${workspaceFolder}/EindopdrachtBD/EindopdrachtBD.csproj"
             }
         },
         {
@@ -76,16 +76,9 @@
             "dependsOn": [
                 "docker-build: debug"
             ],
-            "dockerRun": {
-                "env": {
-                    "ASPNETCORE_URLS": "http://+:3000"
-                },
-                "ports": [
-                    { "containerPort": 3000, "hostPort": 3000 },
-                ]
-            },
+            "dockerRun": {},
             "netCore": {
-                "appProject": "${workspaceFolder}/EindopdrachtBD.csproj",
+                "appProject": "${workspaceFolder}/EindopdrachtBD/EindopdrachtBD.csproj",
                 "enableDebugging": true
             }
         },
@@ -95,16 +88,9 @@
             "dependsOn": [
                 "docker-build: release"
             ],
-            "dockerRun": {
-                "env": {
-                    "ASPNETCORE_URLS": "http://+:3000"
-                },
-                "ports": [
-                    { "containerPort": 3000, "hostPort": 3000 },
-                ]
-            },
+            "dockerRun": {},
             "netCore": {
-                "appProject": "${workspaceFolder}/EindopdrachtBD.csproj"
+                "appProject": "${workspaceFolder}/EindopdrachtBD/EindopdrachtBD.csproj"
             }
         }
     ]

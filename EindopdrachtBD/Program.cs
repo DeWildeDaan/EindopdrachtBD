@@ -20,10 +20,11 @@ builder.Services.AddEndpointsApiExplorer();
 //JWT authentication token
 var authsettings = builder.Configuration.GetSection("AuthenticationSettings");
 builder.Services.Configure<AuthenticationSettings>(authsettings);
-builder.Services.AddAuthorization(options =>{});
-builder.Services.AddAuthentication("Bearer").AddJwtBearer(options=>
+builder.Services.AddAuthorization(options => { });
+builder.Services.AddAuthentication("Bearer").AddJwtBearer(options =>
 {
-    options.TokenValidationParameters = new(){
+    options.TokenValidationParameters = new()
+    {
         ValidateIssuer = true,
         ValidateAudience = true,
         ValidateIssuerSigningKey = true,
@@ -39,7 +40,9 @@ builder.Services
     .AddQueryType<Queries>()
     .ModifyRequestOptions(opt => opt.IncludeExceptionDetails = true)
     .AddMutationType<Mutation>();
-
+//API Link
+var apiSettings = builder.Configuration.GetSection("Api");
+builder.Services.Configure<ApiSettings>(apiSettings);
 
 var app = builder.Build();
 //Swagger documentation
@@ -58,7 +61,8 @@ app.UseAuthorization();
 
 
 //Setup
-app.MapGet("/setup", async (IRestaurantService restaurantService, IAuthenticationService authenticationService) => {
+app.MapGet("/setup", async (IRestaurantService restaurantService, IAuthenticationService authenticationService) =>
+{
     await authenticationService.Setup();
     return Results.Created($"/restaurants", await restaurantService.Setup());
 });
@@ -75,33 +79,45 @@ app.MapGraphQL();
 //Restaurants
 app.MapGet("/restaurants", async (IRestaurantService restaurantService) => Results.Ok(await restaurantService.GetRestaurants()));
 
-app.MapGet("/restaurant/{id}", async (IRestaurantService restaurantService, string id) => {
+app.MapGet("/restaurant/{id}", async (IRestaurantService restaurantService, string id) =>
+{
     var results = await restaurantService.GetRestaurant(id);
-    if(results is null){
+    if (results is null)
+    {
         return Results.NoContent();
-    } else {
+    }
+    else
+    {
         return Results.Ok(results);
     }
 });
 
-app.MapPost("/restaurant", async (IValidator<Restaurant> validator, IRestaurantService restaurantService, Restaurant restaurant) => {
+app.MapPost("/restaurant", async (IValidator<Restaurant> validator, IRestaurantService restaurantService, Restaurant restaurant) =>
+{
     var validatorResult = validator.Validate(restaurant);
-    if(validatorResult.IsValid){
+    if (validatorResult.IsValid)
+    {
         var results = await restaurantService.AddRestaurant(restaurant);
         return Results.Created($"/restaurant/{restaurant.RestaurantId}", results);
-    }else {
-        var errors = validatorResult.Errors.Select(x => new { errors = x.ErrorMessage});
+    }
+    else
+    {
+        var errors = validatorResult.Errors.Select(x => new { errors = x.ErrorMessage });
         return Results.BadRequest(errors);
     }
 });
 
-app.MapPut("/restaurant", [Authorize] async (IValidator<Restaurant> validator,IRestaurantService restaurantService, Restaurant restaurant) => {
+app.MapPut("/restaurant", [Authorize] async (IValidator<Restaurant> validator, IRestaurantService restaurantService, Restaurant restaurant) =>
+{
     var validatorResult = validator.Validate(restaurant);
-    if(validatorResult.IsValid){
+    if (validatorResult.IsValid)
+    {
         var results = await restaurantService.UpdateRestaurant(restaurant);
         return Results.Created($"/restaurant/{restaurant.RestaurantId}", results);
-    }else {
-        var errors = validatorResult.Errors.Select(x => new { errors = x.ErrorMessage});
+    }
+    else
+    {
+        var errors = validatorResult.Errors.Select(x => new { errors = x.ErrorMessage });
         return Results.BadRequest(errors);
     }
 });
@@ -112,42 +128,58 @@ app.MapDelete("/restaurant/{id}", [Authorize] async (IRestaurantService restaura
 //Reviews
 app.MapGet("/reviews", async (IReviewService reviewService) => Results.Ok(await reviewService.GetReviews()));
 
-app.MapGet("/review/{id}", async (IReviewService reviewService, string id) => {
+app.MapGet("/review/{id}", async (IReviewService reviewService, string id) =>
+{
     var results = await reviewService.GetReview(id);
-    if(results is null){
+    if (results is null)
+    {
         return Results.NoContent();
-    } else {
+    }
+    else
+    {
         return Results.Ok(results);
     }
 });
 
-app.MapGet("/restaurantreview/{id}", async (IReviewService reviewService, string id) => {
+app.MapGet("/restaurantreview/{id}", async (IReviewService reviewService, string id) =>
+{
     var results = await reviewService.GetReviewsRestaurant(id);
-    if(results.Count() == 0){
+    if (results.Count() == 0)
+    {
         return Results.NoContent();
-    } else {
+    }
+    else
+    {
         return Results.Ok(results);
     }
 });
 
-app.MapPost("/review", async (IValidator<Review> validator, IReviewService reviewService, Review review) => {
+app.MapPost("/review", async (IValidator<Review> validator, IReviewService reviewService, Review review) =>
+{
     var validatorResult = validator.Validate(review);
-    if(validatorResult.IsValid){
+    if (validatorResult.IsValid)
+    {
         var results = await reviewService.AddReview(review);
         return Results.Created($"/review/{review.ReviewId}", results);
-    }else {
-        var errors = validatorResult.Errors.Select(x => new { errors = x.ErrorMessage});
+    }
+    else
+    {
+        var errors = validatorResult.Errors.Select(x => new { errors = x.ErrorMessage });
         return Results.BadRequest(errors);
     }
 });
 
-app.MapPut("/review", async (IValidator<Review> validator, IReviewService reviewService, Review review) => {
+app.MapPut("/review", async (IValidator<Review> validator, IReviewService reviewService, Review review) =>
+{
     var validatorResult = validator.Validate(review);
-    if(validatorResult.IsValid){
+    if (validatorResult.IsValid)
+    {
         var results = await reviewService.UpdateReview(review);
         return Results.Created($"/review/{review.ReviewId}", results);
-    }else {
-        var errors = validatorResult.Errors.Select(x => new { errors = x.ErrorMessage});
+    }
+    else
+    {
+        var errors = validatorResult.Errors.Select(x => new { errors = x.ErrorMessage });
         return Results.BadRequest(errors);
     }
 });
@@ -168,11 +200,35 @@ app.UseExceptionHandler(c => c.Run(async context =>
     }
 }));
 
+//Uitbereiding
+app.MapPost("/question", async (IValidator<Question> validator, IQuestionSrevice questionService, Question question) =>
+{
+    var validatorResult = validator.Validate(question);
+    if (validatorResult.IsValid)
+    {
+        if (await questionService.CheckBadWords(question) == true)
+        {
+            return Results.BadRequest();
+        }
+        else
+        {
+            return Results.Ok();
+        }
+
+    }
+    else
+    {
+        var errors = validatorResult.Errors.Select(x => new { errors = x.ErrorMessage });
+        return Results.BadRequest(errors);
+    }
+});
+
+
 
 //Local development
-//app.Run("http://localhost:3000");
+app.Run("http://localhost:3000");
 //Docker
 //app.Run("http://0.0.0.0:3000");
 //Tests
-app.Run(); 
-public partial class Program { }
+// app.Run(); 
+// public partial class Program { }

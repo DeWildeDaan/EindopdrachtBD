@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\School\\BackendDev\\EindopdrachtBD\\EindopdrachtBD\\EindopdrachtBD.csproj": {}
+    "c:\\School\\BackendDev\\EindopdrachtBD\\EindopdrachtBD\\EindopdrachtBD.csproj": {}
   },
   "projects": {
-    "C:\\School\\BackendDev\\EindopdrachtBD\\EindopdrachtBD\\EindopdrachtBD.csproj": {
+    "c:\\School\\BackendDev\\EindopdrachtBD\\EindopdrachtBD\\EindopdrachtBD.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\School\\BackendDev\\EindopdrachtBD\\EindopdrachtBD\\EindopdrachtBD.csproj",
+        "projectUniqueName": "c:\\School\\BackendDev\\EindopdrachtBD\\EindopdrachtBD\\EindopdrachtBD.csproj",
         "projectName": "EindopdrachtBD",
-        "projectPath": "C:\\School\\BackendDev\\EindopdrachtBD\\EindopdrachtBD\\EindopdrachtBD.csproj",
+        "projectPath": "c:\\School\\BackendDev\\EindopdrachtBD\\EindopdrachtBD\\EindopdrachtBD.csproj",
         "packagesPath": "C:\\Users\\daand\\.nuget\\packages\\",
-        "outputPath": "C:\\School\\BackendDev\\EindopdrachtBD\\EindopdrachtBD\\obj\\",
+        "outputPath": "c:\\School\\BackendDev\\EindopdrachtBD\\EindopdrachtBD\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -73,6 +73,10 @@
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
               "version": "[6.16.0, )"
+            },
+            "System.Net.Http": {
+              "target": "Package",
+              "version": "[4.3.4, )"
             }
           },
           "imports": [

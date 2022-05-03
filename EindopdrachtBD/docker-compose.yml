@@ -27,6 +27,8 @@ services:
 
   eindopdrachtbd:
     image: ghcr.io/dewildedaan/eindopdrachtbd:latest
+    # build:
+    #   context: .
     restart: always
     ports:
       - 3000:3000
